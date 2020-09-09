@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button  btnPickDate;
     private DatePicker mDatePicker;
     private Calendar mCalender;
-    private int year,month, day;
+    private int year,month, date;
     private DatePickerDialog.OnDateSetListener mDateListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPickDate = findViewById(R.id.btnPickDate);
         btnPickDate.setOnClickListener(this);
         mCalender = Calendar.getInstance();
+        year = mCalender.get(Calendar.YEAR);
+        month = mCalender.get(Calendar.MONTH);
+        date = mCalender.get(Calendar.DATE);
         mDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                tvShowDate.setText("year: " + year + " month: " + month + " day: "+ day );
+            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                tvShowDate.setText("year: " + year + " month: " + month + " day: "+ date );
             }
         };
     }
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == 999){
-            return new DatePickerDialog(this, mDateListener, year, month, day);
+            return new DatePickerDialog(this, mDateListener, year, month, date);
         }
         return super.onCreateDialog(id);
     }
